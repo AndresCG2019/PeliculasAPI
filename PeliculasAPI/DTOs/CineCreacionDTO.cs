@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PeliculasAPI.Entidades
+namespace PeliculasAPI.DTOs
 {
-    public class Cine
+    public class CineCreacionDTO
     {
-        public int Id { get; set; }
         [Required]
         [StringLength(maximumLength:75)]
         public string Nombre { get; set; }
+        [Range(-90, 90)]
+        public double Latitud { get; set; }
+        [Range(-180, 180)]
+        public double Longitud { get; set; }
 
-        public List<PeliculasCines> PeliculasCines { get; set; }
     }
 }
