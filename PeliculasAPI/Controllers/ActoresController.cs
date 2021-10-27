@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeliculasAPI.DTOs;
 using PeliculasAPI.Entidades;
+using PeliculasAPI.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,18 @@ namespace PeliculasAPI.Controllers
             }
 
             return mapper.Map<ActorDTO>(actor);
+        }
+
+        [HttpGet("buscarPorNombre/{nombre}")]
+        public async Task<ActionResult<List<PeliculaActorDTO>>> BuscarPorNombre(string nombre = "") 
+        {
+            if (string.IsNullOrWhiteSpace(nombre)) { return new List<PeliculaActorDTO>(); }
+            return await context.Actores
+                .Where(x => x.Nombre.Contains(nombre))
+                .OrderBy(x => x.Nombre)
+                .Select(x => new PeliculaActorDTO { Id = x.Id, Nombre = x.Nombre, Foto = x.Foto })
+                .Take(5)
+                .ToListAsync();
         }
 
         [HttpPost]
