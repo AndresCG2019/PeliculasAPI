@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PeliculasAPI.DTOs;
 using PeliculasAPI.Entidades;
 using PeliculasAPI.Utilidades;
@@ -26,7 +27,7 @@ namespace PeliculasAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromForm] PeliculaCreacionDTO peliculaCreacionDTO) 
+        public async Task<ActionResult> Post([FromForm] PeliculaCreacionDTO peliculaCreacionDTO) // SI SE ARMA. SIGUE CON EL CURSO
         {
             Pelicula pelicula = mapper.Map<Pelicula>(peliculaCreacionDTO);
 
@@ -35,6 +36,31 @@ namespace PeliculasAPI.Controllers
             context.Add(pelicula);
             await context.SaveChangesAsync();
             return NoContent();
+        }
+
+        [HttpGet("PostGet")]
+        public async Task<ActionResult<PeliculasPostGetDTO>> PostGet() 
+        {
+            List<Cine> cines = await context.Cines.ToListAsync();
+            List<Genero> generos = await context.Generos.ToListAsync();
+
+            // mapeo a cinesdto a mano por fallo en tipo de dato point
+
+            List<CineDTO> cinesDTO = new List<CineDTO>();
+
+            foreach (var item in cines)
+            {
+                CineDTO cineDTO = new CineDTO();
+
+                cineDTO.Nombre = item.Nombre;
+                cineDTO.Id = item.Id;
+
+                cinesDTO.Add(cineDTO);
+            }
+
+            var GenerosDTO = mapper.Map<List<GeneroDTO>>(generos);
+
+            return new PeliculasPostGetDTO() { Cines = cinesDTO, Generos = GenerosDTO};
         }
 
         private void EscribirOrdenActores(Pelicula pelicula) 

@@ -19,7 +19,7 @@ namespace PeliculasAPI.DTOs
         public bool EnCines { get; set; }
         public DateTime FechaEstreno { get; set; }
         public IFormFile Poster { get; set; }
-        [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
+        [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))] // TODO ESTO ES PORQUE ES ESTA USANDO FROM FORM PARA MANDAR LA FOTO O ALGO ASI
         public List<int> GenerosIds { get; set; }
         [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
         public List<int> CinesIds { get; set; }

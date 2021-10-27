@@ -21,6 +21,8 @@ namespace PeliculasAPI.Utilidades
             CreateMap<Actor, ActorDTO>().ReverseMap();
             CreateMap<ActorCreacionDTO, Actor>().ForMember(x => x.Foto, options => options.Ignore());
 
+            // HACER LOS CINES A MANO POR FALLO EN TIPO DE DATO POINT
+
             CreateMap<PeliculaCreacionDTO, Pelicula>()
                 .ForMember(x => x.Poster, opciones => opciones.Ignore())
                 .ForMember(x => x.PeliculasGeneros, opciones => opciones.MapFrom(MapearPeliculasGeneros))
