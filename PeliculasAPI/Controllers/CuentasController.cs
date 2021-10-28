@@ -44,7 +44,7 @@ namespace PeliculasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<ActionResult<RespuestaAutenticacion>> Login([FromBody] CredencialesUsuario credenciales)
         {
             var resultado = await signInManager.PasswordSignInAsync(credenciales.Email, credenciales.Password, 
