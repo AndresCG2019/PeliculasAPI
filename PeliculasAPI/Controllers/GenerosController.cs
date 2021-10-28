@@ -19,7 +19,7 @@ namespace PeliculasAPI.Controllers
     [Route("api/generos")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class GenerosController : ControllerBase
+    public class GenerosController : ControllerBase  
     {
         
         private readonly ILogger<GenerosController> logger;
