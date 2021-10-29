@@ -36,5 +36,6 @@ namespace PeliculasAPI
         public DbSet<PeliculasActores> PeliculasActores { get; set; }
         public DbSet<PeliculasGeneros> PeliculasGeneros { get; set; }
         public DbSet<PeliculasCines> PeliculasCines { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
     }
 }
