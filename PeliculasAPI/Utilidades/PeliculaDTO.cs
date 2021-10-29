@@ -19,5 +19,8 @@ namespace PeliculasAPI.Utilidades
         public List<GeneroDTO> Generos { get; set; }
         public List<ActorDTO> Actores { get; set; }
         public List<CineDTO> Cines { get; set; }
+
+        public int votoUsuario { get; set; }
+        public double PromedioVoto { get; set; }
     }
 }
